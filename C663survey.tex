@@ -45,6 +45,14 @@ In this survey, we compare Object Oriented Middleware against Event Based Middle
 
 \subsection{Object Middleware}
 
+As software systems became distributed, Remote Procedure Calls (RPCs) were developed to facilitate communication between separate applications that need not be located on the same machine.  As described in \cite{Vinoski:2004p8371}, client applications are able to utilise procedures on server applications with RPCs in the same way that they would call regular procedures.  RPCs generally hide the fact that operations are operating in a distributed fashion, making calls to local procedures and remote procedures look the same.
+
+RPCs evolved into Object-oriented middleware (OOM) and gained the benefit of object-oriented concepts such as inheritance, encapsulation, polymorphism, object references and exceptions \cite{Pinus:2006p8367} \cite{Vinoski:2004p8371}.  As many of today's most popular languages are object-oriented, OOM fits in naturally and allows developers to work within a familiar environment.  
+
+OOM uses distributed objects to coordinate processes on multiple hosts.  As with RPCs, OOMs tend to hide the distributed nature of an application.  For example, a client process may have a reference to an object on the server.  As far as the client is concerned, the object is local.  The reference provides method stubs that can be used by the client.  When called, the stubs initiate a network request and take care of the work necessary for network communication, such as the marshalling of parameters.  When the server object finishes its work, a response is sent back in the same way.  
+
+This communication is synchronous, though some OOMs will offer asynchronous communication methods as well.  For example, the Internet Communications Engine (Ice) allows for asynchronous invocation and asynchronous call dispatch \cite{Henning:2004p8372}.  [ELABORATE on what asynch invocation and asynch call dispatch are...]
+
 \subsection{Event-based Middleware}
 
 \section{Applications}
