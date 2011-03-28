@@ -38,12 +38,15 @@ In this survey, we compare Object Oriented Middleware against Event Based Middle
 
 \section{Introduction}
 
-
-\section{History}
+[first page]
 
 \section{Technical Overview}
 
+[half page]
+
 \subsection{Object Middleware}
+
+[one page]
 
 As software systems became distributed, Remote Procedure Calls (RPCs) were developed to facilitate communication between separate applications that need not be located on the same machine.  As described in \cite{Vinoski:2004p8371}, client applications are able to utilise procedures on server applications with RPCs in the same way that they would call regular procedures.  RPCs generally hide the fact that operations are operating in a distributed fashion, making calls to local procedures and remote procedures look the same.
 
@@ -55,26 +58,113 @@ This communication is synchronous, though some OOMs will offer asynchronous comm
 
 \subsection{Event-based Middleware}
 
+
+[one page]
+
+\section{Time, Space and Synchronization}
+
+aka. Buffered / Direct / [A]Synchronous
+
+[one page]
+
+% 
+% I mean the whole middleware thing is defined by whether they are coupled by space, time and synchronization, and who gets the messages. Object oriented is just a group of points in those coordinates, event-based is some other group of points, pub/sub is another set of points
+% 
+% If we set it up with discussions of obj and the bag of eb middleware, then we can lead into the discussion of the time / space / sync question, and then distinguish what we've already discussed in those terms. We could even talk about applications matching points in that space, which makes them more or less appropriate for different systems
+% 
+% I think it is good to start with what is expected (Objects here, Events there) and then pull out the spectrum synthesis later
+% 
+% then we'll discuss applications and how the apps we see fit into the spectrum
+% and then why the application coordinates are close to the system coordinates
+% 
+% Hmm, how would you define event-based middleware? Is the defining point that it is 1:n, or that it is async? or something else?
+%
+% for me, the defining characteristics are data-centricity and async
+% 1:n is a byproduct of the fact that its data centric and not object / host centric
+% in an obj system, there's only one object that you talk to (that provides some service or whatever), and you need it to do something. data centric services make distribution to multiple interested parties natural
+% 
+% I'm trying to figure out the defining points of each of these
+%
+% what defines object middleware and what defines event middleware?
+%
+% yeah
+% 
+% 
+% can you explain your three axis to me? I want to put it into an email to the others to give context to the changes / synthesis. I think they'll be happy, because it's a nice package
+% so time, space, sync.
+% 
+% what do you mean by time?
+% 
+% time essentially means the two machines that are interacting don't need to be even online at the same time. The messages are buffered in the middleware.
+% 
+% okay. space?
+% 
+% the two machines don't need to know about each other, they interact by something other than direct references but instead by interest
+% 
+% okay. and sync?
+% 
+% synchronization means the machines never block waiting on a response from the other
+% the only one that's a little fuzzy is space, but we just have to be clear about what we're talking about. 
+% 
+% do you think there are any other axis? 
+% 
+% well, he also defines the axis of interest, but I'm not sure those are orthogonal to the previously defined axis
+% 
+% nah, I would argue that interest isn't in the same system. Interest is what the system is, time/space/sync is how the system is. object system have interests the same as event systems. they just work differently. that's what discovery services are for
+% 
+% are these three orthogonal?
+% 
+% I would say.. can you have x>0 on one and y=z=0 on the others? can we hold sync and space constant while varying time?
+% 
+% that would effectively just be a really slow connection
+% you can be sync, in that you wait until the other guy comes back online
+% 
+% It may be easier to think of these as buffered, direct and sync
+% 
+% you can be buffered and direct, in the sense that you know who your end point is, but not have a direct link
+% 
+% I suppose you could also think of this as where do you put your layer of abstraction.
+% 
+% that's pretty much what the whole course is about...
+% 
+% This is a start:
+% buffer | direct | sync
+% false  | false  | false => fire and forget, only to online hosts : irc
+% false  | false  | true  => 
+% false  | true   | false => corba notifications
+% false  | true   | true  => RPC
+% true   | false  | false => event based messages : PADRES
+% true   | false  | true  => useless? wait forever
+% true   | true   | false => must be buffered locally, distributed event-based
+% true   | true   | true  => very slow RPC
+
+
 \section{Applications}
 
-\section{Killer App}
+[one page for object applications, how they fit in the spectrum]
 
-\section{Achilles Heel}
+[one page for event applications, how they fit in the spectrum]
 
+\subsection{Killer App}
+
+[half page - why object based is particularly well suited to some kind of application, where are we in the spectrum?]
+
+[half page - why event middleware is  """...]
+
+
+\subsection{Achilles Heel}
+
+[half page - what do obj systems do not so well, why?]
+
+[half page - "    "  event """""]
 
 \section{Conclusions}
 
+[half page]
 
-%
-% The following two commands are all you need in the
-% initial runs of your .tex file to
-% produce the bibliography for the citations in your paper.
+% bib should be about a half page with 10 citations
 \bibliographystyle{abbrv}
-%\bibliography{sigproc}  % sigproc.bib is the name of the Bibliography in this case
-% You must have a proper ".bib" file
-%  and remember to run:
-% latex bibtex latex latex
-% to resolve all references
+\bibliography{local}
 
 \balancecolumns
 
