@@ -54,7 +54,66 @@ RPCs evolved into Object-oriented middleware (OOM) and gained the benefit of obj
 
 OOM uses distributed objects to coordinate processes on multiple hosts.  As with RPCs, OOMs tend to hide the distributed nature of an application.  For example, a client process may have a reference to an object on the server.  As far as the client is concerned, the object is local.  The reference provides method stubs that can be used by the client.  When called, the stubs initiate a network request and take care of the work necessary for network communication, such as the marshalling of parameters.  When the server object finishes its work, a response is sent back in the same way.  
 
-This communication is synchronous, though some OOMs will offer asynchronous communication methods as well.  For example, the Internet Communications Engine (Ice) allows for asynchronous invocation and asynchronous call dispatch \cite{Henning:2004p8372}.  [ELABORATE on what asynch invocation and asynch call dispatch are...]
+This communication is synchronous, though some OOMs will offer asynchronous communication methods as well.  For example, the Internet Communications Engine (Ice) allows for asynchronous invocation and asynchronous call dispatch \cite{Henning:2004p8372}.  [ELABORATE on what asynch invocation and asynch call dispatch are...?]
+
+In the ensuing paragraphs, the different functionalities of OOM middlewares will be described via a comparative study of two well known object oriented middlewares\cite{Henning:2004p8372}.
+
+Common Object Request Broker (CORBA) is an object oriented distribution platform which was invented in the nineties. It was capable of running on heterogeneous environments. But the limitations of Corba lie in the complexity in learning and using. It suffers from several design and protocol inefficiencies and lacks support for some frequently needed features.
+
+Internet Communications Engine (Ice) is a new object oriented middleware developed by ZeroC which allows developers to build client server applications with minimal effort. It provides a simpler and more powerful object model. Moreover, it has overcome many of the difficulties that are frequently faced with CORBA. 
+The CORBA object model has many disadvantages. It has opaque object reference. Thus programmers cannot directly construct an object reference. The object model in CORBA has weak object identity. It has weak semantics for object reference comparison. If two references compared are equal, they denote the same object. To perform object identity comparison, remote invocation is required on each object.
+
+The CORBA object also does not have multiple interfaces. It has one most derived interface which causes problem while upgrading a deployed application without losing backward compatibility. 
+
+CORBA's interface definition language (IDL) does not support exception inheritance. Thus structured exception handling is impossible for languages that support it. 
+
+Ice overcomes the several disadvantages of the CORBA object model in many ways. The proxies in case of Ice are not opaque. Thus the developer can construct a proxy with the knowledge of machine and port number at which a server runs and also knowledge of an object's identity. 
+
+The Ice object model has strong object identity. So applications can reliably compare proxies for equality and proxy equality is equivalent to object equality. An Ice client does not need to send a remote message to compare object identities. So system components can efficiently perform object identity comparisons.
+
+Ice provides both interface inheritance and interface aggregation. Interface aggregation solves the versioning problem. A single object can have multiple unrelated interfaces while retaining a single object identity. Developers can add newer interfaces to preexisting objects without violating the client server contract.
+
+Ice provides single exception inheritance as a built in feature. Here language mappings provide exception hierarchies. The hierarchical exception handling integrates cleanly with the native mechanisms of languages such as C++ and Java.
+
+The specification language of Ice is known as Slice. It is almost similar to Corba's IDL.
+It is very simple and provides minimal number of built in primitives. 
+Slice classes are like Corba value types but in greatly simplified form. Like structures, they are passed by value and can contain several members of arbitrary types. But unlike structures, classes support single implementation inheritance and multiple interface inheritance. Classes implicitly inherit from a common base type Object.
+
+Classes are more flexible than structures because they support pointer semantics. 
+
+The run time API'S for Corba is very complex which diminish its popularity. Developers have to use large number of interfaces with a huge array of operations, to use comparatively single functionality. A very nice example is the Corba Portable Object Adapter API which requires 211 lines of IDL specification. Ice provides an equally functional object adapter but the Ice Object Adapter API  is defined in only 29 lines of Slice definitions.
+
+Similar savings in API size exist for other parts of the Ice run time which makes the platform easier to learn and use than Corba. It also results into smaller libraries and memory footprint at run time, with smaller working set sizes and concomitant performance gains. 
+
+Corba has some disadvantages about language mappings also. The Corba C++ mapping contains many kinds of problems. APIs pass dynamically allocated memory as raw pointers, which easily lead to memory management errors. Parameter passing rules are complex. If value types contain circular references, the Corba C++ mapping simply leaks their memory.  
+
+The Ice Java mapping resembles the Corba Java mapping, but it is smaller and simpler because of Slice’s simpler type model. Ice currently provides language mappings for Java, C++, and PHP. The Ice C++ mapping avoids the Corba C++ mapping’s pitfalls. The mapping is free from memory-management artifacts. 
+
+With respect to invocation models, Ice has some advantages over Corba. Corba supports synchronous, asynchronous, and one-way invocation modes. Ice covers these three invocation modes along with datagram and batching capabilities. 
+
+There is another functionality of object oriented programming called threading. While Corba specification does not provide a threading model, Ice is multithreaded.
+
+Apart from the different functionalities of OOMs, they provide some specific services also \cite{Vinoski:2004p8371}. The services are independent of any platform domain. These are described as follows.
+
+One of the services is directory services. It allows applications to look up or discover distributed resources. Directory services avoid hard-code network addresses and other communication details into applications as hard-coding may result in a very brittle and hard-to-maintain system. Directory services are often federated. The services are not centralized and are instead implemented across a number of hosts and linked to form a coherent distributed service.
+
+Another service provided by OOM is transaction service. It helps applications to commit or roll back their transactions.
+These services are critically important in distributed transactional systems, like those used for financial applications or reservations systems. Middleware meant for this domain specifically takes the form of distributed transaction managers that create and coordinate transactions together with resource managers that are local to each node involved in the transaction.
+
+Security services support for authentication and  authorization across a distributed system. Such services often coordinate across multiple disparate security systems to supply single sign-on capabilities that manage credentials transparently across the underlying systems on behalf of applications.
+
+Management services help to monitor and maintain systems while they are running, specifically in production. Each application in the distributed system is capable of logging error, warning, and informational messages regarding its operation via a distributed logging service, and to raise alerts to monitoring systems to notify system operators of problems.
+
+Event services allow applications to post event messages for reception with the help of other applications. These can form the basis for the management alerts. In RPC-style systems, event
+services allow for looser coupling between applications. They can even provide messaging-like persistent queueing capabilities.
+
+Persistence services help applications with managing their non-volatile data. There are different types of approaches for providing persistence for applications. Some of them are concerned with relational databases, while others are object-oriented databases. There are  still others which are oriented around  non-typical datastores such as persistent keyvalue pairs or even plain text files. Regardless of the approach  used, middleware persistence abstraction layers hide these underlying storage mechanisms from applications.
+
+Load balancing services point incoming requests or messages to appropriate service application replicas which are most capable of handling the request at that point in time. Specifically, balancing services track the load of individual service replicas and transparently forward each request or message to the particular replica that is least loaded.
+
+Configuration services add flexibility to applications by modifying or augmenting middleware capabilities non-programmatically, often through management consoles. This service allows application behavior, performance, and scalability to be modified and tuned without requiring the application to be recompiled. In some cases, for example, an application can have its security or transactional capabilities enabled or disabled entirely through configuration.
+
+Such services offered by middleware applications, relieves applications from having to supply them for themselves. Many of these services, mainly those related to security and transactions, require significant expertise and resources for developing correctly. Applications that depend on such services can be smaller, easier to develop, and more flexible. But ultimately their reliability and robustness are  as good as that of the services they rely on.
 
 \subsection{Event-based Middleware}
 
