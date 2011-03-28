@@ -35,14 +35,19 @@ In this survey, we compare Object Oriented Middleware against Event Based Middle
 
 \end{abstract}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Introduction}
 
 [first page]
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Technical Overview}
 
 [half page]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Object Middleware}
 
@@ -87,7 +92,7 @@ Similar savings in API size exist for other parts of the Ice run time which make
 
 Corba has some disadvantages about language mappings also. The Corba C++ mapping contains many kinds of problems. APIs pass dynamically allocated memory as raw pointers, which easily lead to memory management errors. Parameter passing rules are complex. If value types contain circular references, the Corba C++ mapping simply leaks their memory.  
 
-The Ice Java mapping resembles the Corba Java mapping, but it is smaller and simpler because of Slice’s simpler type model. Ice currently provides language mappings for Java, C++, and PHP. The Ice C++ mapping avoids the Corba C++ mapping’s pitfalls. The mapping is free from memory-management artifacts. 
+The Ice Java mapping resembles the Corba Java mapping, but it is smaller and simpler because of Slice's simpler type model. Ice currently provides language mappings for Java, C++, and PHP. The Ice C++ mapping avoids the Corba C++ mapping's pitfalls. The mapping is free from memory-management artifacts. 
 
 With respect to invocation models, Ice has some advantages over Corba. Corba supports synchronous, asynchronous, and one-way invocation modes. Ice covers these three invocation modes along with datagram and batching capabilities. 
 
@@ -111,9 +116,11 @@ Persistence services help applications with managing their non-volatile data. Th
 
 Load balancing services point incoming requests or messages to appropriate service application replicas which are most capable of handling the request at that point in time. Specifically, balancing services track the load of individual service replicas and transparently forward each request or message to the particular replica that is least loaded.
 
-Configuration services add flexibility to applications by modifying or augmenting middleware capabilities non-programmatically, often through management consoles. This service allows application behavior, performance, and scalability to be modified and tuned without requiring the application to be recompiled. In some cases, for example, an application can have its security or transactional capabilities enabled or disabled entirely through configuration.
+Configuration services add flexibility to applications by modifying or augmenting middleware capabilities non programmatically, often through management consoles. This service allows application behaviour, performance, and scalability to be modified and tuned without requiring the application to be recompiled. In some cases, for example, an application can have its security or transactional capabilities enabled or disabled entirely through configuration.
 
 Such services offered by middleware applications, relieves applications from having to supply them for themselves. Many of these services, mainly those related to security and transactions, require significant expertise and resources for developing correctly. Applications that depend on such services can be smaller, easier to develop, and more flexible. But ultimately their reliability and robustness are  as good as that of the services they rely on.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Event-based Middleware}
 
@@ -127,23 +134,18 @@ Event based systems are often alternately referred to as Message Oriented Middle
 \item[Notification] The producers begin sending events to the interested consumers.
 \end{description}
 
-Each of these phases can have different levels of abstraction which subsequently inform the qualities of the system. 
+Each of these phases can have different levels of abstraction which subsequently inform the qualities of the system In some systems, the advertisement phase is absent completely and consumers must discover event producers through some other mechanism. For example, in a tightly coupled system such as system event notifications on a single host - such as Microsoft's COM+ Events system - information about which event producers are available and which events the produce may simply be listed in programmer documentation. Alternately, the Cambridge Event Architecture (CAE) includes a facility for event producers to be directly queried by consumers for lists of which events they produce and the interface for subscribing to those events \cite{Bacon:2000p6818}. In this system, consumers interact directly with producers to both discover and subscribe to events, and notifications are then delivered directly to those consumers by the producer. If we introduce a layer of indirection between the producer and consumer, an intermediate service may act as a broker between producers and consumers. In this type of system, consumers interact with the broker as they would with the producer directly, and the producer communicates only with the broker. In this way, the producer sends its advertisements to the broker, who then makes those advertisements available to consumers. For example, in the PADRES system multiple brokers form a network through which advertisements are flooded, \cite{Jacobsen:2010p8313}, eventually reaching all the consumers in the system.
 
-In some systems, the advertisement phase is absent completely and consumers must discover event producers through some other mechanism. For example, in a tightly coupled system such as system event notifications on a single host, information about which event producers are available and which events the produce may simply be listed in programmer documentation. Alternately, the Cambridge Event Architecture includes a facility for event producers to be directly queried by consumers for lists of which events they produce, and the interface for subscribing to those events \cite{Bacon:2000p6818}. In this system, consumers interact directly with producers to both discover and subscribe to events, and notifications are then delivered directly to those consumers by the producer. If we introduce a layer of indirection between the producer and consumer, an intermediate service may act as a broker between producers and consumers. In this type of system, consumers interact with the broker as they would with the producer directly, and the producer communicates only with the broker. In this way, the producer sends its advertisements to the broker, who then makes those advertisements available to consumers. For example, in the PADRES system multiple brokers form a network through which advertisements are flooded, \cite{Jacobsen:2010p8313}, eventually reaching all the consumers in the system.
+Registration and Notification phases can be handled similarly. The consumers can register with the event producer directly, such as in CAE \cite{Bacon:2000p6818}, or they can register with some intermediate entity, such as a broker. Typically, if a consumer registers with a broker then they will also receive notifications through the same broker. While the direct registration and notification system is simpler to conceptualize and build, the layer of abstraction provided by the brokered architecture has advantages for scaling and performance, as the burden of communicating with consumers is moved from the producer to the broker. This performance and scalability concern is significant enough that some event architectures which are primarily designed with direct communications between producers and consumers in mind, such as CAE \cite{Bacon:2000p6818} and Java Message Service (JMS) \cite{Oracle:2002p8432}, have extensions which introduce brokers between consumers and producers which can be leveraged to improve performance on heavily loaded systems.
 
-Regsitration -> direct vs brokers
+In addition to different design choices for the mechanics of event advertisement, registration and notification, there is a similar range of choices for the implementation of the events or messages themselves. In tightly coupled systems, messages can be serialized platform specific objects passed between producer and consumer, such as serialized Java Beans in JMS \cite{Oracle:2002p8432}, or objects defined by the programmer through an IDL, such as in CORBA Events \cite{Siegel:1999p8569}. In these instances, some level of system homogeneity is required, in that both producer and consumer must understand object formats and semantics. More loosely coupled systems implement messages as specially formatted strings of ordinary text, and a producer or consumer simply has to understand the format of messages in order to participate in the system. PADRES is an example of such a system where entities interact by passing textual messages to each other \cite{Jacobsen:2010p8313}, and messages simply consist of lists of parameter values formatted into tuples ({\it i.e.,\/ [Param, =, Value]}).
 
-Notification -> direct vs brokers
+In addition to a spectrum of message formats, there is a spectrum of registration types. In the simplest registration systems, consumers simply register for all events of some type and subsequently receive notifications of all such events. The CORBA Event Service is like this, in that consumers subscribe to some event channel and subsequently receive every event that is posted to that channel . In more complex systems, clients can subscribe to some subset of events by supplying a filter. Filters typically specify some range of event parameter values that the consumer is interested in, and producers or brokers refrain from passing events that do not match that filter to those clients. Most event based middleware supports this kind of filtering, including JMS, CORBA Notifications, CAE and PADRES. More complex still is the composition of events into composite event registrations, in which a consumer registers for an event which is composed of two or more other events. Support for this kind of composite registration is less common, and is complicated if the consumer registers for composite events which are supplied by different producers. CAE and PADRES both support composite event registrations through their brokers, who handle the business of registering for the individual event notifications and then perform the event composition for the consumer. The difference between the two implementations is in the nature of the composing entity: In CAE the Composite Event Service is monolithic and fixed, whereas in PADRES composite events can be processed by any broker in the network and the brokers work together to choose some broker that can perform the event composition with minimal cost in terms of network resources and broker computation resources. In this way, the PADRES composite event implementation scales better than the CAE implementation.
 
-message types, formats, semantics (SQL like / filters / text).
+We see then that there is a wide spectrum of event based middleware. System semantics typically follow the advertise / register / notify paradigm, but the details of how each of these phases works can vary between implementations. Communications between consumers and producers can be direct or mediated by brokers, with resultant effects on performance and scalability. Events and messages themselves can be implemented in both platform dependent or platform independent ways, and the mechanism for achieving platform independence can be either through some shared specification, such as when IDLs are used, or simply through the use of plain text messages which are parsed by system entities. Finally, event registrations or subscriptions can range from the simplistic type where all events produced are simply consumed, to the more sophisticated type where events can be filtered out based on consumer preferences, to the very complex where events from different producers can be composed together by system intermediaries and delivered to consumers who have registered for these composite events. While we have largely confined ourselves here to the JMS, CAE, CORBA and PADRES implementations of event or message based middleware, there exist many more implementations, some of which are surveyed by Tarkoma {\it etal.\ } in \cite{Tarkoma:2006p6862}.
 
-no brokers, single brokers, networks of brokers. 
 
-topics / queues. subscriptions. composite subscriptions. 
-
-%In its simplest form, event based middleware takes the form of an intra or inter-application event notification framework on a single host, such as in Microsoft's COM+ Events system or the OpenStep NotificationCenter system. In these systems, applications can subscribe to particular events that are generated by other parts of the same application or other applications on the same host. Examples include system status notifications (sleep, wake), user interface events (clicking on a particular widget), or task status events (task starting, completed). The middleware in these systems consists mainly of a simple software layer between producers and consumers that receives registrations from consumers and then distributes events to them as they are produced.
-
-%A somewhat more sophisticated model is the Java Message Service \cite{Oracle:2002p8432}. In this system, a JMS Server produces messages organized by topic
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Time, Space and Synchronization}
 
@@ -223,11 +225,15 @@ aka. Buffered / Direct / [A]Synchronous
 % true   | true   | true  => very slow RPC
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Applications}
 
 [one page for object applications, how they fit in the spectrum]
 
 [one page for event applications, how they fit in the spectrum]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Killer App}
 
@@ -235,12 +241,15 @@ aka. Buffered / Direct / [A]Synchronous
 
 [half page - why event middleware is  """...]
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Achilles Heel}
 
 [half page - what do obj systems do not so well, why?]
 
 [half page - "    "  event """""]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Conclusions}
 
