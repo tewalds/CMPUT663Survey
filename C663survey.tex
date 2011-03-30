@@ -96,9 +96,24 @@ We see then that there is a wide spectrum of event based middleware. System sema
 
 \section{Time, Space and Synchronization}
 
-aka. Buffered / Direct / [A]Synchronous
 
-[one page]
+Middleware is meant for communication between systems, though they vary in a few ways. One of the big distinctions between categories of middleware is how the endpoints are coupled. The main 3 ways that the endpoints can be coupled is in time, space and synchronization. Highly coupled systems appear to be local and are easier to reason about, but are not scalable. Decoupling can be achieved along these 3 axes:
+
+\begin{description}
+\item[Time decoupling] The endpoints need not be available at the same time. Messages can be buffered in the middleware and received at a later time, even if the sender is no longer available.
+\item[Space decoupling] The endpoints need not know who is sending or receiving the messages. It may even be multiple receivers.
+\item[Synchronization decoupling] The endpoints need not wait for each other to process the messages or send a response.
+\end{description}
+
+Given these definitions, we analyze where object-oriented middleware and event-based middleware fit into the spectrum.
+
+Object-oriented middleware is often used as Remote Procedure Calls (RPC). To disguise the fact that it is a remote call, it must be coupled in time and be synchronous. An error will occur if the other endpoint is unavailable or if it is very slow to reply. Most Object-oriented middleware would be considered coupled in space, though some object-oriented middleware uses a lookup service to establish a connection with the other endpoint. In those cases they would be partially coupled due to still communicating directly with the other endpoint. When sending an asynchronous notification, the middleware would be considered partially synchronous. The sender need not wait for the receiver, but the receiver must process the message immediately.
+
+Many event-based middleware implementations attempt to be fully decoupled for maximum scalability. Some event-based middleware, such as CAE are only partially decoupled in time and space, while enforcing synchronization decoupling, but most of them introduce a broker to handle the decoupling. The broker can buffer messages locally to allow messages be received despite being offline when the publisher sent the message or the publisher being offline when it is received. The broker delivers the messages to all interested parties, allowing the publisher to be oblivious to the recipient. When there are many interested recipients, the broker can distribute the message more efficiently than if the publisher had to send the message to each recipient directly. 
+
+%aka. Buffered / Direct / [A]Synchronous
+
+%[one page]
 
 % 
 % I mean the whole middleware thing is defined by whether they are coupled by space, time and synchronization, and who gets the messages. Object oriented is just a group of points in those coordinates, event-based is some other group of points, pub/sub is another set of points
