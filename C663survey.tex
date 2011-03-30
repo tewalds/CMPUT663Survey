@@ -98,27 +98,6 @@ With respect to invocation models, Ice has some advantages over Corba. Corba sup
 
 There is another functionality of object oriented programming called threading. While Corba specification does not provide a threading model, Ice is multithreaded.
 
-Apart from the different functionalities of OOMs, they provide some specific services also \cite{Vinoski:2004p8371}. The services are independent of any platform domain. These are described as follows.
-
-One of the services is directory services. It allows applications to look up or discover distributed resources. Directory services avoid hard-code network addresses and other communication details into applications as hard-coding may result in a very brittle and hard-to-maintain system. Directory services are often federated. The services are not centralized and are instead implemented across a number of hosts and linked to form a coherent distributed service.
-
-Another service provided by OOM is transaction service. It helps applications to commit or roll back their transactions.
-These services are critically important in distributed transactional systems, like those used for financial applications or reservations systems. Middleware meant for this domain specifically takes the form of distributed transaction managers that create and coordinate transactions together with resource managers that are local to each node involved in the transaction.
-
-Security services support for authentication and  authorization across a distributed system. Such services often coordinate across multiple disparate security systems to supply single sign-on capabilities that manage credentials transparently across the underlying systems on behalf of applications.
-
-Management services help to monitor and maintain systems while they are running, specifically in production. Each application in the distributed system is capable of logging error, warning, and informational messages regarding its operation via a distributed logging service, and to raise alerts to monitoring systems to notify system operators of problems.
-
-Event services allow applications to post event messages for reception with the help of other applications. These can form the basis for the management alerts. In RPC-style systems, event
-services allow for looser coupling between applications. They can even provide messaging-like persistent queueing capabilities.
-
-Persistence services help applications with managing their non-volatile data. There are different types of approaches for providing persistence for applications. Some of them are concerned with relational databases, while others are object-oriented databases. There are  still others which are oriented around  non-typical datastores such as persistent keyvalue pairs or even plain text files. Regardless of the approach  used, middleware persistence abstraction layers hide these underlying storage mechanisms from applications.
-
-Load balancing services point incoming requests or messages to appropriate service application replicas which are most capable of handling the request at that point in time. Specifically, balancing services track the load of individual service replicas and transparently forward each request or message to the particular replica that is least loaded.
-
-Configuration services add flexibility to applications by modifying or augmenting middleware capabilities non programmatically, often through management consoles. This service allows application behaviour, performance, and scalability to be modified and tuned without requiring the application to be recompiled. In some cases, for example, an application can have its security or transactional capabilities enabled or disabled entirely through configuration.
-
-Such services offered by middleware applications, relieves applications from having to supply them for themselves. Many of these services, mainly those related to security and transactions, require significant expertise and resources for developing correctly. Applications that depend on such services can be smaller, easier to develop, and more flexible. But ultimately their reliability and robustness are  as good as that of the services they rely on.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
