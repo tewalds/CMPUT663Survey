@@ -61,42 +61,10 @@ OOM uses distributed objects to coordinate processes on multiple hosts.  As with
 
 This communication is synchronous, though some OOMs will offer asynchronous communication methods as well.  For example, the Internet Communications Engine (Ice) allows for asynchronous invocation and asynchronous call dispatch \cite{Henning:2004p8372}.  [ELABORATE on what asynch invocation and asynch call dispatch are...?]
 
-In the ensuing paragraphs, the different functionalities of OOM middlewares will be described via a comparative study of two well known object oriented middlewares\cite{Henning:2004p8372}.
 
-Common Object Request Broker (CORBA) is an object oriented distribution platform which was invented in the nineties. It was capable of running on heterogeneous environments. But the limitations of Corba lie in the complexity in learning and using. It suffers from several design and protocol inefficiencies and lacks support for some frequently needed features.
 
-Internet Communications Engine (Ice) is a new object oriented middleware developed by ZeroC which allows developers to build client server applications with minimal effort. It provides a simpler and more powerful object model. Moreover, it has overcome many of the difficulties that are frequently faced with CORBA. 
-The CORBA object model has many disadvantages. It has opaque object reference. Thus programmers cannot directly construct an object reference. The object model in CORBA has weak object identity. It has weak semantics for object reference comparison. If two references compared are equal, they denote the same object. To perform object identity comparison, remote invocation is required on each object.
 
-The CORBA object also does not have multiple interfaces. It has one most derived interface which causes problem while upgrading a deployed application without losing backward compatibility. 
 
-CORBA's interface definition language (IDL) does not support exception inheritance. Thus structured exception handling is impossible for languages that support it. 
-
-Ice overcomes the several disadvantages of the CORBA object model in many ways. The proxies in case of Ice are not opaque. Thus the developer can construct a proxy with the knowledge of machine and port number at which a server runs and also knowledge of an object's identity. 
-
-The Ice object model has strong object identity. So applications can reliably compare proxies for equality and proxy equality is equivalent to object equality. An Ice client does not need to send a remote message to compare object identities. So system components can efficiently perform object identity comparisons.
-
-Ice provides both interface inheritance and interface aggregation. Interface aggregation solves the versioning problem. A single object can have multiple unrelated interfaces while retaining a single object identity. Developers can add newer interfaces to preexisting objects without violating the client server contract.
-
-Ice provides single exception inheritance as a built in feature. Here language mappings provide exception hierarchies. The hierarchical exception handling integrates cleanly with the native mechanisms of languages such as C++ and Java.
-
-The specification language of Ice is known as Slice. It is almost similar to Corba's IDL.
-It is very simple and provides minimal number of built in primitives. 
-Slice classes are like Corba value types but in greatly simplified form. Like structures, they are passed by value and can contain several members of arbitrary types. But unlike structures, classes support single implementation inheritance and multiple interface inheritance. Classes implicitly inherit from a common base type Object.
-
-Classes are more flexible than structures because they support pointer semantics. 
-
-The run time API'S for Corba is very complex which diminish its popularity. Developers have to use large number of interfaces with a huge array of operations, to use comparatively single functionality. A very nice example is the Corba Portable Object Adapter API which requires 211 lines of IDL specification. Ice provides an equally functional object adapter but the Ice Object Adapter API  is defined in only 29 lines of Slice definitions.
-
-Similar savings in API size exist for other parts of the Ice run time which makes the platform easier to learn and use than Corba. It also results into smaller libraries and memory footprint at run time, with smaller working set sizes and concomitant performance gains. 
-
-Corba has some disadvantages about language mappings also. The Corba C++ mapping contains many kinds of problems. APIs pass dynamically allocated memory as raw pointers, which easily lead to memory management errors. Parameter passing rules are complex. If value types contain circular references, the Corba C++ mapping simply leaks their memory.  
-
-The Ice Java mapping resembles the Corba Java mapping, but it is smaller and simpler because of Slice's simpler type model. Ice currently provides language mappings for Java, C++, and PHP. The Ice C++ mapping avoids the Corba C++ mapping's pitfalls. The mapping is free from memory-management artifacts. 
-
-With respect to invocation models, Ice has some advantages over Corba. Corba supports synchronous, asynchronous, and one-way invocation modes. Ice covers these three invocation modes along with datagram and batching capabilities. 
-
-There is another functionality of object oriented programming called threading. While Corba specification does not provide a threading model, Ice is multithreaded.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
