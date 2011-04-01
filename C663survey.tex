@@ -238,7 +238,9 @@ Email is one of the earliest examples, and easily the most used. Email is a very
 
 Messages are sent by a user to their SMTP server synchronously, but the final delivery is asynchronous. This server attempts to locate the next destination and forwards the message. If the destination is a local address, then it is simply delivered. If the next server is down, it is buffered locally for later delivery. If the next server rejects the message, then it is bounced to the sender, to be noticed at a later date. If the next server accepts the message, the process starts over from there, until it has reached the final destination. The sender and recipient are decoupled in time, since the message could be delivered to a recipient who is offline at the time of sending, and the sender can be offline at the time of arrival.
 
-While the sender sends a message to a specific email address, that address may be associated with many recipients. Some addresses are forwarded to many recipients, which can form the basis of a mailing list. Other addresses are forwarded to many devices, such as a desktop, laptop, and mobile phone. While an email address is a specific address, it is actually closer to a subscription to a fairly broad set of messages in the publish/subscribe model. If the subscription wasn't so broad, spam wouldn't be such a big problem.
+While an email address appears to be a specific address, it is actually closer to a fairly broad subscription in the publish/subscribe model. A mailing list is nothing more than an email address that is associated with multiple recipients. Many mailing lists allow arbitrarily many people to subscribe to that address, again similar to subscriptions in the publish/subscribe model. Other addresses are forwarded to many devices, such as a desktop, laptop, and mobile phone, showing that even if an address is only associated with a single user, it may be associated with multiple devices. SPAM would not be nearly such a big problem if the subscription wasn't so broad.
+
+Email is a well known, well used and very scalable event-based system. Messages are sent asynchronously and are buffered in the broker network, while the final recipient of each message is only loosely related to the destination address. These are the main attributes of an event-based middleware.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -255,7 +257,7 @@ Assume, like today, there are billions of websites all interacting on PADRES. In
 
 Imagine you want to buy a laptop, so you do a search for "laptop". Instead of getting a page with 10 listings, some leading to definitions, some to reviews, some to places to buy, you'd get a flood of all content that has ever been produced that mentioned laptops. If you limit your search to only new content, you'd still get a flood of content that is unlikely to be interesting. If you limit your search even more so it is now only new articles about buying the very specific brand of laptop you are interested in buying, it may take days for anyone to publish anything new that you are interested in, making it quite useless for you to get information. If now you publish a message saying you are looking to buy that specific brand of laptop, your message is freely available to anyone on the network to subscribe to and therefore to reply to. In order to maximize profit it is quite likely that dozens of companies that sell that brand and model, or even similar ones will publish a response, many of which would fit your subscription, again flooding you with information that you didn't want.
 
-If you want a timely response from a specific other party, event-based middleware is totally inappropriate as the foundation of your communications.
+If you want a timely response from a specific other party or an error if that other party is offline or unreachable, event-based middleware is totally inappropriate as the foundation of your communications.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
