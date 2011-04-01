@@ -191,35 +191,70 @@ Many event-based middleware implementations attempt to be fully decoupled for ma
 
 \section{Applications}
 
+\subsection{Object Oriented Middleware}
+
 [one page for object applications, how they fit in the spectrum]
 
-[one page for event applications, how they fit in the spectrum]
 
-System events (COM+ NSNotificationCenter)
-
-Sensor network
-
-BGP?
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Killer App}
+\subsubsection{Killer App}
 
 [half page - why object based is particularly well suited to some kind of application, where are we in the spectrum?]
 
-[half page - why event middleware is  """...]
-
-email
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Achilles Heel}
+\subsubsection{Achilles Heel}
 
 [half page - what do obj systems do not so well, why?]
 
-[half page - "    "  event """""]
 
-http / web
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Event Based Middleware}
+ % [one page for event applications, how they fit in the spectrum]
+
+Event based middleware is typically well suited to applications that require or are tolerant of asynchronous interaction. Event systems are therefore typically loosely coupled in synchronization, though they may be tightly coupled in either space or time. In this section, we discuss applications of event based systems in single host system event systems, in wireless sensor networks, and in ???
+
+System event notifications are perhaps one of the simplest forms of an event system application. Well known examples include the Microsoft COM+ event architecture and the Mac OS X NSNotificationCenter architecture. 
+
+- anything that is loosely coupled\\
+- anything asynchronous\\
+- anything that must be scalable\\
+\\
+- event notifications on OSX/windows\\
+- broadcasting updates (stocks, news, twitter)\\
+- communication (irc, xmpp, email)\\
+- sensor networks\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Killer App}
+
+[half page - why event based is particularly well suited to some kind of application, where are we in the spectrum?]
+
+Email\\
+- scalable\\
+- async\\
+- buffered\\
+- brokers\\
+- not a single address, could be multiple emails, devices or people\\
+- not pub/sub, no advertisements\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Achilles Heel}
+
+[half page - what do event systems do not so well, why?]
+
+- low latency or high coupling\\
+- synchronous calls
+
+HTTP - imagine HTTP was done over PADRES\\
+- synchronous\\
+- unbuffered\\
+- no brokers\\
+- no advertisements or subscriptions\\
+- request/response\\
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
