@@ -191,25 +191,66 @@ Many event-based middleware implementations attempt to be fully decoupled for ma
 
 \section{Applications}
 
+\subsection{Object Oriented Middleware}
+
 [one page for object applications, how they fit in the spectrum]
 
-[one page for event applications, how they fit in the spectrum]
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Killer App}
+\subsubsection{Killer App}
 
 [half page - why object based is particularly well suited to some kind of application, where are we in the spectrum?]
 
-[half page - why event middleware is  """...]
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Achilles Heel}
+\subsubsection{Achilles Heel}
 
 [half page - what do obj systems do not so well, why?]
 
-[half page - "    "  event """""]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Event Based Middleware}
+[one page for event applications, how they fit in the spectrum]
+
+- anything that is loosely coupled\\
+- anything asynchronous\\
+- anything that must be scalable\\
+\\
+- event notifications on OSX/windows\\
+- broadcasting updates (stocks, news, twitter)\\
+- communication (irc, xmpp, email)\\
+- sensor networks\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Killer App}
+
+[half page - why event based is particularly well suited to some kind of application, where are we in the spectrum?]
+
+Email\\
+- scalable\\
+- async\\
+- buffered\\
+- brokers\\
+- not a single address, could be multiple emails, devices or people\\
+- not pub/sub, no advertisements\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Achilles Heel}
+
+[half page - what do event systems do not so well, why?]
+
+- low latency or high coupling\\
+- synchronous calls
+
+HTTP - imagine HTTP was done over PADRES\\
+- synchronous\\
+- unbuffered\\
+- no brokers\\
+- no advertisements or subscriptions\\
+- request/response\\
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
