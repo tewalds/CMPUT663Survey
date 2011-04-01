@@ -214,7 +214,8 @@ Many event-based middleware implementations attempt to be fully decoupled for ma
 
 Event based middleware is typically well suited to applications that require or are tolerant of asynchronous interaction. Event systems are therefore typically loosely coupled in synchronization, though they may be tightly coupled in either space or time. In this section, we discuss applications of event based systems in single host system event systems, in wireless sensor networks, and in ???
 
-System event notifications are perhaps one of the simplest forms of an event system application. Well known examples include the Microsoft COM+ event architecture and the Mac OS X NSNotificationCenter architecture. 
+System event notifications are perhaps one of the simplest forms of an event system application. Well known examples include the Microsoft COM+ event architecture and the Mac OS X Notification system architecture. Both of these systems serve as general purpose application publish / subscribe systems, but are often used in the context of notifying interested applications of system related activities on a single host. The Mac OS X Notification system \cite{nsnotification} provides a straightforward implementation
+
 
 - anything that is loosely coupled\\
 - anything asynchronous\\
