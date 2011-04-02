@@ -237,7 +237,7 @@ Keeping these challenges into mind, the paper has implemented a four layer middl
 
 
 
-%%%%%%% I believe the main reason they lie OOM is because it allows use of OO principles such as reusability of components.  Development of the system is extremely time consuming and OO principles help speed up the development cycle.
+%%%%%%% I believe the main reason they like OOM is because it allows use of OO principles such as reusability of components.  Development of the system is extremely time consuming and OO principles help speed up the development cycle.
 
 Object oriented middlewares also play important roles in astronomical control systems. These types of systems are basically very complex. An example of this is the Instrument Control System (ICS) software, which needs large amount of cost and effort. Object-oriented coding can help in reducing the effort and cost of the development of such systems. \cite{Dipper:2004p8366} describes the use of object-oriented techniques in astronomical control systems. Many astronomical control systems consist of heterogeneous distributed systems. Object oriented middlewares are required to handle this type of system.
 
@@ -267,11 +267,21 @@ Apart from the discussed middlewares, there are several other middlewares develo
 
 [half page - why object based is particularly well suited to some kind of application, where are we in the spectrum?]
 
+% Pretty tired while writing this.  Hopefully it still makes sense and I don't ramble in circles.  Or write something way out in left field.  Is that the right metaphor?  I'm Canadian so I'm not a baseball fan.  Then again, I don't watch a lot of hockey either.  Rambling is ok in comments.
+
+As previously described, object-oriented middleware is most appropriate for systems that are highly coupled in time and tend towards high coupling in synchronization.  However, the biggest strengths of OOM are not addressed within the three axis coordinate system which we have been using in this paper.  The major advantage of using OOM is that it is \textit{object oriented} and thus brings with it object-oriented design principles.  Many application domains, such as MMOGs \cite{Denault:2011p8364}, are naturally broken down into objects.  The use of OOM thus makes the most sense, and object-oriented programming results in code with higher understandability.  Moreover, developers in these fields are already accustomed to object-oriented design.
+
+Other application domains require high configurability.  \cite{Dipper:2004p8366} indicates a strong preference for object-oriented middleware due to object-oriented design.  In particular, they note that objects allow design that exhibits high coherence and low coupling \textit{within} the system.  Objects encapsulate particular functionality and can be reused in other systems.  New objects can be swapped into older systems with little difficulty, and objects may be modified with ease.  Objects can be grouped together as a component that can further promote reuse.  Therefore one of the greatest values in using OOM is not a single killer application, but rather the fact that object-oriented design facilitates developers in developing multiple applications in an efficient manner (i.e. reusing previously built components), as well as maintaining applications that have components liable to change (e.g. an object that makes use of an algorithm that can be replaced with a better algorithm depending on the circumstance).
+
+It is difficult to pin down one particular application that is exemplary for object-oriented middleware.  % Umm... something about domains that are naturally object-ified?
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Achilles Heel}
 
 [half page - what do obj systems do not so well, why?]
+
+Object-oriented middleware is not suitable for applications that require low coupling in time.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
