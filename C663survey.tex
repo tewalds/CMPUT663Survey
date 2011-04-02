@@ -1,5 +1,8 @@
 \documentclass{acm_proc_article-sp}
 
+\usepackage {subfigure}
+
+
 \begin{document}
 
 \title{Object-oriented vs Event-based middleware}
@@ -41,6 +44,9 @@ In this survey, we compare Object Oriented Middleware against Event Based Middle
 \label{sec:intro}
 
 %[first page]
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -129,6 +135,26 @@ Event based systems are often alternately referred to as Message Oriented Middle
 \item[Registration] Consumers choose one or many advertisements and indicate what events or messages they would like to be notified of.
 \item[Notification] The producers begin sending events to the interested consumers.
 \end{description}
+
+\begin{figure} 
+\centering
+\begin{minipage}{6.0cm}
+\subfigure[Direct Communication]{
+	\includegraphics[width=6.0cm]{ebbasic.pdf}
+	\label{fig:ebbasic}
+}
+\end{minipage}
+\begin{minipage}{8.0cm}
+\subfigure[Brokered Communication]{
+	\includegraphics[width=8.0cm]{ebbroker.pdf}
+	\label{fig:ebbroker}
+}
+\end{minipage}
+\centering
+\caption{Functional Semantics of Event Based Middleware}
+\label{fig:ebsemantics}
+\end{figure}
+
 
 Each of these phases can have different levels of abstraction which subsequently inform the qualities of the system. In some systems, the advertisement phase is absent completely and consumers must discover event producers through some other mechanism. For example, in a tightly coupled system such as system event notifications on a single host - such as Microsoft's COM+ Events system or the OpenStep Notification system - information about which event producers are available and which events they produce may simply be listed in programmer documentation. Alternately, the Cambridge Event Architecture (CAE) includes a facility for event producers to be directly queried by consumers for lists of which events they produce and the interface for subscribing to those events \cite{Bacon:2000p6818}. In this system, consumers interact directly with producers to both discover and subscribe to events, and notifications are then delivered directly to those consumers by the producer. If we introduce a layer of indirection between the producer and consumer, an intermediate service may act as a broker between producers and consumers. In this type of system, consumers interact with the broker as they would with the producer directly, and the producer communicates only with the broker. In this way, the producer sends its advertisements to the broker, who then makes those advertisements available to consumers. For example, in the PADRES system multiple brokers form a network through which advertisements are flooded, \cite{Jacobsen:2010p8313}, eventually reaching all the consumers in the system.
 
