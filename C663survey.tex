@@ -273,11 +273,6 @@ As previously described, object-oriented middleware is most appropriate for syst
 
 Other application domains require high configurability.  \cite{Dipper:2004p8366} indicates a strong preference for object-oriented middleware due to object-oriented design.  In particular, they note that objects allow design that exhibits high coherence and low coupling \textit{within} the system.  Objects encapsulate particular functionality and can be reused in other systems.  New objects can be swapped into older systems with little difficulty, and objects may be modified with ease.  Objects can be grouped together as a component that can further promote reuse.  Therefore one of the greatest values in using OOM is not a single killer application, but rather the fact that object-oriented design facilitates developers in developing multiple applications in an efficient manner (i.e. reusing previously built components), as well as maintaining applications that have components liable to change (e.g. an object that makes use of an algorithm that can be replaced with a better algorithm depending on the circumstance).
 
-% Need to cite these:
-% http://www.bigworldtech.com/technology/server.php, which I will cite for now with the key "bigworldtech"
-% http://massiv.ow2.org/, which I will cite with the key "massiv"
-% the newly added paper "Practical Middleware for MMOG", which I will cite with the key "Hsiao:2005p8709" (I am guessing the key is author, year and... uh, random number?)
-
 It is difficult to pin down one particular application that is exemplary for object-oriented middleware.  Object-oriented middleware is suitable for any system with the above requirements.  MMOGs may prove to be the killer app for OOM as it indeed lines up with our application description.  MMOGs are highly coupled in time and are synchronous in nature.  As already mentioned, the game world is naturally deconstructed into objects and game developers tend to use object-oriented design.  Moreover, different games within a genre tend to have similar components.  A company developing multiple games therefore stands to benefit from the reusability afforded by object-oriented design principles.  New games can be developed more quickly by reusing components from previously developed games.  Encapsulation provided by object-oriented design also makes it easier to swap out components, which may be necessary to accomodate a growing base of players and to keep an older game competitive and up-to-date as technologies advance.  Finally, MMOGs can also be considered a killer app because the MMOG industry has proven to be highly lucrative.
 
 BigWorld and Massiv  are two game engines that function as an object-oriented middleware.  Objects and scripts in BigWorld are written in the object-oriented languages Python and C++ \cite{bigworldtech}.  Massiv is built on C++ and offers an extended object model and other features to simplify MMOG development \cite{massiv}.  Both of these middlewares are mentioned in \cite{Hsiao:2005p8709}, which also mentions ICE as another middleware platform with features that help with the development of MMOGs (though it should be noted that ICE is not designed specifically with MMOGs in mind).
@@ -290,9 +285,15 @@ However, MMOGs have not yet emerged as a killer app specific to object-oriented 
 
 [half page - what do obj systems do not so well, why?]
 
-Object-oriented middleware is not suitable for applications that require low coupling in time.  One of the most obvious examples of such a system is email, which is described in detail in Section [NEED TO PUT IN SECTION NUMBER] as a killer application for event-based middleware.
+Object-oriented middleware is not suitable for applications that require low coupling in time.  Also, it is not very well suited to asynchronous applications.  One of the most obvious examples of such a system is email, which is described in detail in Section [NEED TO PUT IN SECTION NUMBER] as a killer application for event-based middleware.  In general, object-oriented middleware does not buffer messages; an error occurs if a request or response is not delivered in a timely manner.
 
 % Wait, is this right?  Mail can be buffered if the server to which it should be delivered is down.  That means that there is low coupling in time, right?
+
+Email is also a data-driven system, in that it is concerned with the distribution of data messages - the emails themselves.  The consequence of this fact is that there is very little to fit within an object-oriented paradigm.  The recipient "server" endpoint only serves as a data repository in the transaction, and the client sender merely sends data and does not invoke any functionality on the server side.
+
+Suppose that email is based on object-oriented middleware.  As object-oriented middleware is coupled in time, both the sender and the recipient would have to be online simultaneously.  Furthermore, resolving the destination (thatis, binding) becomes much more difficult.  Rather than operating over a decentralized network of SMTP servers, a lookup service would be needed.
+
+% I suppose this would look something like WWW?  I can see email as the Achilles Heel given its suitability to event-based middleware.  However, thinking on it right now, I don't see a particularly outstanding problem with going about it in an RPC fashion.  I may just be blind at the moment.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
