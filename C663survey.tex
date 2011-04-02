@@ -309,7 +309,7 @@ However, MMOGs have not yet emerged as a killer app specific to object-oriented 
 
 %[half page - what do obj systems do not so well, why?]
 
-Object-oriented middleware is not suitable for applications that require low coupling in time.  Also, it is not very well suited to asynchronous applications.  One of the most obvious examples of such a system is email, which is described in detail in Section \ref{sec:appsebgood} as a killer application for event-based middleware.  In general, object-oriented middleware does not buffer messages; an error occurs if a request or response is not delivered in a timely manner.
+Object-oriented middleware is not suitable for applications that require low coupling in time.  Also, it is not very well suited to asynchronous applications.  One of the most obvious examples of such a system is email, which is described in detail in Section \ref{sec:appsebgood} as a killer application for event-based middleware.  In general, object-oriented middleware does not buffer messages; an error occurs if a request or response is not delivered in a timely manner.  This limitation makes it unsuitable for email, which is inherently time decoupled and asynchronous.
 
 % Wait, is this right?  Mail can be buffered if the server to which it should be delivered is down.  That means that there is low coupling in time, right?
 % Yup, both producer and consumer do not need to be up at the same time. This is nice with email, because it means when my ISP goes down mail destined for my domain just gets buffered until my ISP comes back on, then it gets delivered. 
@@ -317,7 +317,7 @@ Object-oriented middleware is not suitable for applications that require low cou
 
 Email is also a data-driven system, in that it is concerned with the distribution of data messages - the emails themselves.  The consequence of this fact is that there is very little to fit within an object-oriented paradigm.  The recipient "server" endpoint only serves as a data repository in the transaction, and the client sender merely sends data and does not invoke any functionality on the server side.
 
-Suppose that email is based on object-oriented middleware.  As object-oriented middleware is coupled in time, both the sender and the recipient would have to be online simultaneously.  Furthermore, resolving the destination (thatis, binding) becomes much more difficult.  Rather than operating over a decentralized network of SMTP servers, a lookup service would be needed.
+Suppose that email is based on object-oriented middleware.  As object-oriented middleware is coupled in time, both the sender and the recipient would have to be online simultaneously.  Furthermore, resolving the destination (that is, binding) becomes much more difficult.  Rather than operating over a decentralized network of SMTP servers, a lookup service would be needed.
 
 % I suppose this would look something like WWW?  I can see email as the Achilles Heel given its suitability to event-based middleware.  However, thinking on it right now, I don't see a particularly outstanding problem with going about it in an RPC fashion.  I may just be blind at the moment.
 
