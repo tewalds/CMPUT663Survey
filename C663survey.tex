@@ -38,22 +38,23 @@ In this survey, we compare Object Oriented Middleware against Event Based Middle
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Introduction}
+\label{sec:intro}
 
-[first page]
+%[first page]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Technical Overview}
-
-[half page]
+\label{sec:technical}
+%[half page]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Object-Oriented Middleware}
+\label{sec:techobj}
+%[one page]
 
-[one page]
-
-[How does it work, principles]
+%[How does it work, principles]
 
 As software systems became distributed, Remote Procedure Calls (RPCs) were developed to facilitate communication between separate applications that need not be located on the same machine.  As described in \cite{Vinoski:2004p8371}, client applications are able to utilise procedures on server applications with RPCs in the same way that they would call regular procedures.  RPCs generally hide the fact that operations are operating in a distributed fashion, making calls to local procedures and remote procedures look the same.
 
@@ -102,8 +103,8 @@ As Vinoski notes in \cite{Vinoski:2004p8371}, distributed systems are becoming i
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Event-based Middleware}
-
-[one page]
+\label{sec:techeb}
+%[one page]
 
 Event based systems are often alternately referred to as Message Oriented Middleware (MOM) or Publish / Subscribe systems, but they all follow the same basic semantics. In event based middleware systems, entities are typically broken down into producers and consumers. The producers generate events and send them to the consumers, who receive and react to them. The mechanics of how these systems function vary within a wide range, but the functional semantics are typically broken down into three phases:
 
@@ -127,7 +128,7 @@ We see then that there is a wide spectrum of event based middleware. System sema
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Time, Space and Synchronization}
-
+\label{sec:timespace}
 
 Middleware is meant for communication between systems, though they vary in a few ways. One of the big distinctions between categories of middleware is how the endpoints are coupled. The main 3 ways that the endpoints can be coupled is in time, space and synchronization. Highly coupled systems appear to be local and are easier to reason about, but are not scalable. Decoupling can be achieved along these 3 axes:
 
@@ -222,10 +223,11 @@ Many event-based middleware implementations attempt to be fully decoupled for ma
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Applications}
+\label{sec:apps}
 
 \subsection{Object Oriented Middleware}
-
-[one page for object applications, how they fit in the spectrum]
+\label{sec:appsobj}
+%[one page for object applications, how they fit in the spectrum]
 
 Object oriented middleware is best suited for applications that are tightly coupled in time and are usually better for applications that require synchronous communication.
 
@@ -264,8 +266,9 @@ Apart from the discussed middlewares, there are several other middlewares develo
 
 
 \subsubsection{Killer App}
+\label{sec:appsobjgood}
 
-[half page - why object based is particularly well suited to some kind of application, where are we in the spectrum?]
+%[half page - why object based is particularly well suited to some kind of application, where are we in the spectrum?]
 
 % Pretty tired while writing this.  Hopefully it still makes sense and I don't ramble in circles.  Or write something way out in left field.  Is that the right metaphor?  I'm Canadian so I'm not a baseball fan.  Then again, I don't watch a lot of hockey either.  Rambling is ok in comments.
 
@@ -277,6 +280,7 @@ Other application domains require high configurability.  \cite{Dipper:2004p8366}
 % http://www.bigworldtech.com/technology/server.php, which I will cite for now with the key "bigworldtech"
 % http://massiv.ow2.org/, which I will cite with the key "massiv"
 % the newly added paper "Practical Middleware for MMOG", which I will cite with the key "Hsiao:2005p8709" (I am guessing the key is author, year and... uh, random number?)
+% Good guess. It actually tries to use the page numbers from the journal in which it was published, but in the absence of that just picks something. 
 
 It is difficult to pin down one particular application that is exemplary for object-oriented middleware.  Object-oriented middleware is suitable for any system with the above requirements.  MMOGs may prove to be the killer app for OOM as it indeed lines up with our application description.  MMOGs are highly coupled in time and are synchronous in nature.  As already mentioned, the game world is naturally deconstructed into objects and game developers tend to use object-oriented design.  Moreover, different games within a genre tend to have similar components.  A company developing multiple games therefore stands to benefit from the reusability afforded by object-oriented design principles.  New games can be developed more quickly by reusing components from previously developed games.  Encapsulation provided by object-oriented design also makes it easier to swap out components, which may be necessary to accomodate a growing base of players and to keep an older game competitive and up-to-date as technologies advance.  Finally, MMOGs can also be considered a killer app because the MMOG industry has proven to be highly lucrative.
 
@@ -287,17 +291,22 @@ However, MMOGs have not yet emerged as a killer app specific to object-oriented 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Achilles Heel}
+\label{sec:appsobjbad}
 
-[half page - what do obj systems do not so well, why?]
+%[half page - what do obj systems do not so well, why?]
 
-Object-oriented middleware is not suitable for applications that require low coupling in time.  One of the most obvious examples of such a system is email, which is described in detail in Section [NEED TO PUT IN SECTION NUMBER] as a killer application for event-based middleware.
+Object-oriented middleware is not suitable for applications that require low coupling in time.  One of the most obvious examples of such a system is email, which is described in detail in Section \ref{sec:appsebgood} as a killer application for event-based middleware.
 
 % Wait, is this right?  Mail can be buffered if the server to which it should be delivered is down.  That means that there is low coupling in time, right?
+% Yup, both producer and consumer do not need to be up at the same time. This is nice with email, because it means when my ISP goes down mail destined for my domain just gets buffered until my ISP comes back on, then it gets delivered. 
+% incidentally, if you ever get interested, spammers use mail delivery agents which require time synchronization, which is the basis of greylisting.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Event Based Middleware}
+\label{sec:appseb}
+
  % [one page for event applications, how they fit in the spectrum]
 
 Event based middleware is typically well suited to applications that require or are tolerant of asynchronous interaction. Event systems are therefore typically loosely coupled in synchronization, though they may be tightly coupled in either space or time. In this section, we discuss applications of event based systems in single host system event systems and in wireless sensor networks.
@@ -331,8 +340,9 @@ As applied to the inter-vehicular ad-hoc network, the STEAM event system allows 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Killer App}
+\label{sec:appsebgood}
 
-[half page - why event based is particularly well suited to some kind of application, where are we in the spectrum?]
+%[half page - why event based is particularly well suited to some kind of application, where are we in the spectrum?]
 
 Event-based middleware is well suited to any application where the components are loosely coupled and can work asynchronously, particularly if they don't know or don't need to know the exact origin or destination of their messages.
 
@@ -348,8 +358,9 @@ Email is a well known, well used and very scalable event-based system. Messages 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Achilles Heel}
+\label{sec:appsebbad}
 
-[half page - what do event systems do not so well, why?]
+%[half page - what do event systems do not so well, why?]
 
 Event-based middleware is not suited to applications that follow the request/response model. There are rarely guarantees of delivery  at all, since it is unknown whether there is actually an interested recipient for each message. There is also no guarantee of latency. If a message can be buffered in the broker network until an interested recipient arrives, it could be months before a given message is processed. Together these make event-based middleware inapplicable to situations where synchronous operation is desirable.
 
@@ -365,8 +376,9 @@ If you want a timely response from a specific other party or an error if that ot
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Conclusions}
+\label{sec:conclusion}
 
-[half page]
+%[half page]
 
 % bib should be about a half page with 10 citations
 \bibliographystyle{abbrv}
