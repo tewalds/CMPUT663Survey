@@ -48,6 +48,22 @@ In this survey, we compare Object Oriented Middleware against Event Based Middle
 \label{sec:technical}
 %[half page]
 
+% different purposes
+% different centricities
+% spectrum in all cases
+
+In this section we will briefly review some of the technical details on both object oriented and event based middleware systems. While we will see that both object oriented middleware and event based middleware exist within a spectrum of technical details, each middleware type typically follows a common procedural semantic through which entities interact. 
+
+Object and event based systems are rooted in different functional requirements, which subsequently inform their technical implementations. Object oriented middleware has its roots in Remote Procedure Calls, and is therefore typically concerned with the correct coordination of activity between remote entities. Event or message based systems evolved form the simple requirement for different entities to exchange information and are less concerned about whether or not the different entities are acting in concert. Thus, object middleware is typically functionality-centric, while event based middleware tends to be data-centric. These different centres of interest are reflected in the technical capabilities of each system type. 
+
+Despite their fundamental differences in interest, both object oriented and event based systems are variations on inter-entity communication mechanisms, and can be tooled for similar purposes. As will be seen in the following discussion, CORBA appears as both object oriented and event based middleware. This is because the CORBA Events system is a variation on the original CORBA object middleware \cite{Siegel:1999p8569,Emmerich:2007p8368} which allows CORBA Components to publish and subscribe to events. In this way, CORBA enables object oriented communication semantics simultaneously with event based communication semantics. 
+
+
+
+% CORBA as all things to all people - does OO and events - makes a mess of it?
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Object-Oriented Middleware}
@@ -289,7 +305,7 @@ However, MMOGs have not yet emerged as a killer app specific to object-oriented 
 
 %[half page - what do obj systems do not so well, why?]
 
-Object-oriented middleware is not suitable for applications that require low coupling in time.  Also, it is not very well suited to asynchronous applications.  One of the most obvious examples of such a system is email, which is described in detail in Section [NEED TO PUT IN SECTION NUMBER] as a killer application for event-based middleware.  In general, object-oriented middleware does not buffer messages; an error occurs if a request or response is not delivered in a timely manner.
+Object-oriented middleware is not suitable for applications that require low coupling in time.  Also, it is not very well suited to asynchronous applications.  One of the most obvious examples of such a system is email, which is described in detail in Section \ref{sec:appsebgood} as a killer application for event-based middleware.  In general, object-oriented middleware does not buffer messages; an error occurs if a request or response is not delivered in a timely manner.
 
 % Wait, is this right?  Mail can be buffered if the server to which it should be delivered is down.  That means that there is low coupling in time, right?
 % Yup, both producer and consumer do not need to be up at the same time. This is nice with email, because it means when my ISP goes down mail destined for my domain just gets buffered until my ISP comes back on, then it gets delivered. 
