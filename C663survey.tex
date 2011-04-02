@@ -56,7 +56,7 @@ In this section we will briefly review some of the technical details on both obj
 
 Object and event based systems are rooted in different functional requirements, which subsequently inform their technical implementations. Object oriented middleware has its roots in Remote Procedure Calls, and is therefore typically concerned with the correct coordination of activity between remote entities. Event or message based systems evolved from the simple requirement for different entities to exchange information and are less concerned about whether or not the different entities are acting in concert. Thus, object middleware is typically functionality-centric, while event based middleware tends to be data-centric. These different centres of interest are reflected in the technical capabilities of each system type. 
 
-Despite their fundamental differences in interest, both object oriented and event based systems are variations on inter-entity communication mechanisms, and can be tooled for similar purposes. As will be seen in the following discussion, CORBA appears as both object oriented and event based middleware. This is because the CORBA Events system is a variation on the original CORBA object middleware \cite{Siegel:1999p8569,Emmerich:2007p8368} which allows CORBA Components to publish and subscribe to events. In this way, CORBA enables object oriented communication semantics simultaneously with event based communication semantics, at the cost of increased complexity.
+Despite their fundamental differences in interest, both object oriented and event based systems are variations on inter-entity communication mechanisms, and can be tooled for similar purposes. As will be seen in the following discussion, CORBA appears as both object oriented and event based middleware. This is because the CORBA Events system is a variation on the original CORBA object middleware \cite{Siegel:1999p8569,Emmerich:2007p8368} which allows CORBA Components to publish event objects which are subsequently consumed by subscribers. In this way, CORBA enables object oriented communication semantics simultaneously with event based communication semantics, at the cost of increased complexity.
 
 In the following subsections, we briefly discuss the technical implementations and characteristics of  object oriented middleware, followed by event based systems. 
 
@@ -240,6 +240,10 @@ Many event-based middleware implementations attempt to be fully decoupled for ma
 
 \section{Applications}
 \label{sec:apps}
+
+Having discussed the dimensions in which middleware systems are decoupled, and what characteristics follow from which decouplings, we now present a discussion of practical applications of both object oriented and event based middleware systems. For each of these applications, we will show how the functional requirements of the application place it at some coordinate in the three axis system of time, space and synchronization decoupling. Given this placement, which kind of middleware is appropriate for the application becomes obvious, and we therefore show that the application requirements are suited to the middleware characteristics. 
+
+After presenting several examples of middleware applications, we discuss which kinds of applications are best suited to both object oriented and event based middleware, and which kinds of applications are poorly suited. We will see that each kind of middleware has particular strengths and weaknesses which are typically the inverse of the other, making object oriented and event based middleware systems complementary. 
 
 \subsection{Object Oriented Middleware}
 \label{sec:appsobj}
