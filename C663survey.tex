@@ -6,7 +6,7 @@
 \begin{document}
 
 \title{Object-oriented vs Event-based middleware}
-\subtitle{[Abstract]}
+%\subtitle{[Abstract]}
 
 
 \numberofauthors{4} 
@@ -34,7 +34,7 @@ Timo Ewalds\\
 \maketitle
 \begin{abstract}
 
-In this survey, we compare Object Oriented Middleware against Event Based Middleware.
+In this survey, we compare object oriented middleware and event based middleware with an emphasis on applications for each middleware type. We identify time, space and synchronization coupling as three distinguishing criteria between middleware implementations, and use these criteria to identify why particular applications are more or less well suited to particular middleware platforms. Using these criteria, we identify that object and event based systems have complementary characteristics that make one middleware type more suitable where the other is less so. 
 
 \end{abstract}
 
@@ -47,7 +47,9 @@ In this survey, we compare Object Oriented Middleware against Event Based Middle
 
 Middleware provides a common interface through which distributed applications and systems can interact. Depending on the application requirements, this interaction can be as simple as basic message passing or as complex as distributed state synchronization. Between these extremes, applications take on a spectrum of functional requirements that drive the corresponding middleware functional requirements. While some applications may be highly time sensitive, others may be latency tolerant. Some applications may be required to scale to hundreds or thousands of interacting entities, while others require tight coupling between a small number of hosts. Different middleware solutions possess a range of capabilities as diverse as this set of application requirements, providing the developer with a spectrum of choice when considering which middleware platform is best suited to their application.
 
-In this survey, we examine the technical aspects of both object oriented and event based middleware. We discuss the characteristics and some technical implementations of each type, and find that both event based and object oriented systems each follow their own basic set of functional semantics but vary widely in terms of technical details. We identify three basic criteria by which different middleware systems are distinguished, and cast both object oriented and event based systems into terms of 
+In this survey, we examine the technical and practical aspects of both object oriented and event based middleware. We discuss the characteristics and some technical implementations of each type, and find that both event based and object oriented systems each follow their own basic set of functional semantics but vary widely in terms of technical details. We identify time, space and synchronization coupling as three basic criteria by which different middleware systems are distinguished, and cast both object oriented and event based systems into where they typically fall within this set of criteria. Using these three distinguishing criteria as a guide, we discuss several applications of both object oriented and event based middleware systems. We find that these systems each have their own strengths and weaknesses, and are especially well suited or poorly suited to different applications in complementary ways.
+
+This survey proceeds as follows: Section \ref{sec:technical} provides a general overview of both object oriented and event based middleware. We introduce the three distinguishing criteria of time, space and synchronization coupling in Section \ref{sec:timespace}, and discuss how these criteria can identify which applications are more or less appropriate for different middleware implementations in Section \ref{sec:apps}. We conclude in Section \ref{sec:conclusion}.
 
 
 
@@ -139,7 +141,7 @@ Event based systems are often alternately referred to as Message Oriented Middle
 \item[Notification] The producers begin sending events to the interested consumers.
 \end{description}
 
-\begin{figure} 
+\begin{figure}[hbt]
 \centering
 \begin{minipage}{6.0cm}
 \subfigure[Direct Communication]{
